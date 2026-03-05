@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Wind } from "lucide-react";
+import aconquijaLogo from "@/assets/aconquija-logo.png";
 
 const navLinks = [
   { href: "#inicio", label: "Inicio" },
@@ -23,7 +24,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
         <a href="#inicio" className="flex items-center gap-2">
-          <Wind className="h-7 w-7 text-primary" />
+          <img src={aconquijaLogo} alt="" className="h-20 w-auto rounded-full shadow-xl transition-transform duration-300 hover:scale-105" />
           <span className="font-orbitron text-sm font-bold tracking-wider text-foreground md:text-base">
             ACONQUIJA
           </span>
