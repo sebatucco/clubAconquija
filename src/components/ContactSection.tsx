@@ -28,7 +28,7 @@ const ContactSection = () => {
           viewport={{ once: true }}
           className="mb-12 text-center"
         >
-          <h2 className="mb-3 font-orbitron text-3xl font-bold text-foreground md:text-4xl">
+          <h2 className="mb-3 font-outfit text-3xl font-bold text-foreground md:text-4xl">
             <span className="text-gradient-sky">Contacto</span>
           </h2>
           <p className="text-muted-foreground">

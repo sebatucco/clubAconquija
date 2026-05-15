@@ -14,7 +14,6 @@ export default {
     },
     extend: {
       fontFamily: {
-        orbitron: ["Orbitron", "sans-serif"],
         outfit: ["Outfit", "sans-serif"],
       },
       colors: {

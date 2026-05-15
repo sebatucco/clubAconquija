@@ -19,7 +19,7 @@ const AboutSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="mb-4 font-orbitron text-3xl font-bold text-foreground md:text-4xl">
+            <h2 className="mb-4 font-outfit text-3xl font-bold text-foreground md:text-4xl">
               Sobre el <span className="text-gradient-sky">Club</span>
             </h2>
             <p className="mb-6 text-lg leading-relaxed text-muted-foreground">
@@ -47,7 +47,7 @@ const AboutSection = () => {
                 <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                   <f.icon className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="mb-1 font-orbitron text-xs font-semibold text-foreground">{f.title}</h3>
+                <h3 className="mb-1 font-outfit text-xs font-semibold text-foreground">{f.title}</h3>
                 <p className="text-xs text-muted-foreground">{f.desc}</p>
               </motion.div>
             ))}

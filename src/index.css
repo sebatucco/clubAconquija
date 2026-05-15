@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,41 +6,41 @@
 
 @layer base {
   :root {
-    --background: 210 30% 98%;
-    --foreground: 215 30% 12%;
+    --background: 190 30% 97%;
+    --foreground: 250 14% 9%;
 
-    --card: 210 40% 98%;
-    --card-foreground: 215 30% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 250 14% 9%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 30% 12%;
+    --popover-foreground: 250 14% 9%;
 
-    --primary: 205 85% 50%;
+    --primary: 190 64% 45%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 25% 93%;
-    --secondary-foreground: 215 30% 12%;
+    --secondary: 189 38% 90%;
+    --secondary-foreground: 250 14% 9%;
 
-    --muted: 210 20% 95%;
-    --muted-foreground: 215 15% 50%;
+    --muted: 190 20% 94%;
+    --muted-foreground: 190 10% 45%;
 
-    --accent: 200 70% 60%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 189 48% 70%;
+    --accent-foreground: 250 14% 9%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 210 25% 90%;
-    --input: 210 25% 90%;
-    --ring: 205 85% 50%;
+    --border: 190 20% 85%;
+    --input: 190 20% 85%;
+    --ring: 190 64% 45%;
 
     --radius: 0.75rem;
 
-    --sky-light: 200 80% 85%;
-    --sky-medium: 205 85% 50%;
-    --sky-deep: 215 70% 35%;
+    --sky-light: 189 48% 70%;
+    --sky-medium: 190 64% 45%;
+    --sky-deep: 201 88% 10%;
     --mountain: 150 20% 30%;
-    --cloud: 210 30% 96%;
+    --cloud: 190 20% 96%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -49,37 +49,37 @@
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 190 64% 45%;
   }
 
   .dark {
-    --background: 215 30% 8%;
-    --foreground: 210 30% 95%;
-    --card: 215 30% 12%;
-    --card-foreground: 210 30% 95%;
-    --popover: 215 30% 12%;
-    --popover-foreground: 210 30% 95%;
-    --primary: 205 85% 55%;
+    --background: 250 14% 6%;
+    --foreground: 190 15% 92%;
+    --card: 250 14% 10%;
+    --card-foreground: 190 15% 92%;
+    --popover: 250 14% 10%;
+    --popover-foreground: 190 15% 92%;
+    --primary: 190 64% 50%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 215 25% 18%;
-    --secondary-foreground: 210 30% 95%;
-    --muted: 215 20% 18%;
-    --muted-foreground: 215 15% 60%;
-    --accent: 200 70% 55%;
+    --secondary: 190 30% 15%;
+    --secondary-foreground: 190 15% 92%;
+    --muted: 190 20% 15%;
+    --muted-foreground: 190 15% 55%;
+    --accent: 189 48% 65%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 215 25% 20%;
-    --input: 215 25% 20%;
-    --ring: 205 85% 55%;
+    --border: 190 20% 18%;
+    --input: 190 20% 18%;
+    --ring: 190 64% 50%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary: 190 64% 45%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 190 64% 50%;
   }
 }
 
@@ -91,7 +91,7 @@
     @apply bg-background text-foreground font-outfit;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Outfit', sans-serif;
   }
 }
 
@@ -103,22 +103,22 @@
     @apply bg-background/80 backdrop-blur-lg border-b border-border/30 shadow-sm;
   }
   .gradient-sky {
-    background: linear-gradient(135deg, hsl(200 80% 85%), hsl(205 85% 50%), hsl(215 70% 35%));
+    background: linear-gradient(135deg, hsl(189 48% 70%), hsl(190 64% 45%), hsl(201 88% 10%));
   }
   .gradient-sky-soft {
-    background: linear-gradient(180deg, hsl(200 80% 92%) 0%, hsl(205 70% 96%) 50%, hsl(210 30% 98%) 100%);
+    background: linear-gradient(180deg, hsl(189 48% 90%) 0%, hsl(190 64% 95%) 50%, hsl(190 30% 97%) 100%);
   }
   .text-gradient-sky {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(205 85% 50%), hsl(200 70% 60%), hsl(215 70% 35%));
+    background-image: linear-gradient(135deg, hsl(190 64% 45%), hsl(189 48% 70%), hsl(201 88% 10%));
   }
   .hero-overlay {
     background: linear-gradient(180deg, 
-      hsla(215, 30%, 8%, 0.3) 0%, 
-      hsla(215, 30%, 8%, 0.1) 30%, 
-      hsla(215, 30%, 8%, 0.05) 50%,
-      hsla(215, 30%, 8%, 0.4) 80%, 
-      hsla(215, 30%, 8%, 0.7) 100%
+      hsla(250, 14%, 9%, 0.3) 0%, 
+      hsla(250, 14%, 9%, 0.1) 30%, 
+      hsla(250, 14%, 9%, 0.05) 50%,
+      hsla(250, 14%, 9%, 0.4) 80%, 
+      hsla(250, 14%, 9%, 0.7) 100%
     );
   }
   .section-padding {

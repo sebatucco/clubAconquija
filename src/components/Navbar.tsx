@@ -25,8 +25,8 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
         <a href="#inicio" className="flex items-center gap-2">
           <img src={aconquijaLogo} alt="" className="h-20 w-auto rounded-full shadow-xl transition-transform duration-300 hover:scale-105" />
-          <span className="font-orbitron text-sm font-bold tracking-wider text-foreground md:text-base">
-            ACONQUIJA
+          <span className="font-outfit text-sm font-bold tracking-wider text-foreground md:text-base">
+            ACONQUIJA CLUB DE VUELO Y AVENTURA
           </span>
         </a>
 

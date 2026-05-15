@@ -15,7 +15,7 @@ const SocialSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-8 font-orbitron text-2xl font-bold text-foreground md:text-3xl"
+          className="mb-8 font-outfit text-2xl font-bold text-foreground md:text-3xl"
         >
           Seguinos en <span className="text-gradient-sky">redes</span>
         </motion.h2>

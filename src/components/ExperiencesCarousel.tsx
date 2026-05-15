@@ -31,7 +31,7 @@ const ExperiencesCarousel = () => {
           viewport={{ once: true }}
           className="mb-12 text-center"
         >
-          <h2 className="mb-3 font-orbitron text-3xl font-bold text-foreground md:text-4xl">
+          <h2 className="mb-3 font-outfit text-3xl font-bold text-foreground md:text-4xl">
             Experiencias de <span className="text-gradient-sky">Vuelo</span>
           </h2>
           <p className="text-muted-foreground">
@@ -57,7 +57,7 @@ const ExperiencesCarousel = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
                     <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10">
-                      <h3 className="font-orbitron text-xl font-bold text-primary-foreground md:text-3xl">
+                      <h3 className="font-outfit text-xl font-bold text-primary-foreground md:text-3xl">
                         {slide.title}
                       </h3>
                       <p className="mt-1 text-sm text-primary-foreground/80 md:text-base">

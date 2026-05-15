@@ -37,7 +37,7 @@ const FlightExperiences = () => {
           viewport={{ once: true }}
           className="mb-12 text-center"
         >
-          <h2 className="mb-3 font-orbitron text-3xl font-bold text-foreground md:text-4xl">
+          <h2 className="mb-3 font-outfit text-3xl font-bold text-foreground md:text-4xl">
             Nuestras <span className="text-gradient-sky">Experiencias</span>
           </h2>
           <p className="text-muted-foreground">Elegí tu aventura en el cielo tucumano</p>
@@ -64,7 +64,7 @@ const FlightExperiences = () => {
                 />
               </div>
               <div className="p-5">
-                <h3 className="mb-2 font-orbitron text-sm font-bold text-foreground">{exp.title}</h3>
+                <h3 className="mb-2 font-outfit text-sm font-bold text-foreground">{exp.title}</h3>
                 <p className="text-xs leading-relaxed text-muted-foreground">{exp.desc}</p>
               </div>
             </motion.div>

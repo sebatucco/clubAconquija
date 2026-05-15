@@ -1,4 +1,5 @@
-import { Wind, Facebook, Instagram, MessageCircle } from "lucide-react";
+import { Facebook, Instagram, MessageCircle } from "lucide-react";
+import aconquijaLogo from "@/assets/aconquija-logo.png";
 
 const Footer = () => {
   return (
@@ -7,8 +8,8 @@ const Footer = () => {
         <div className="grid gap-8 md:grid-cols-3">
           <div>
             <div className="mb-3 flex items-center gap-2">
-              <Wind className="h-6 w-6 text-primary" />
-              <span className="font-orbitron text-sm font-bold text-foreground">ACONQUIJA</span>
+              <img src={aconquijaLogo} alt="" className="h-8 w-auto rounded-full" />
+              <span className="font-outfit text-sm font-bold text-foreground">ACONQUIJA CLUB DE VUELO Y AVENTURA </span>
             </div>
             <p className="text-sm text-muted-foreground">
               Club de Vuelo y Aventura · Tucumán, Argentina
@@ -16,7 +17,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="mb-3 font-orbitron text-xs font-semibold uppercase tracking-wider text-foreground">
+            <h4 className="mb-3 font-outfit text-xs font-semibold uppercase tracking-wider text-foreground">
               Links
             </h4>
             <div className="flex flex-col gap-2">
@@ -33,7 +34,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="mb-3 font-orbitron text-xs font-semibold uppercase tracking-wider text-foreground">
+            <h4 className="mb-3 font-outfit text-xs font-semibold uppercase tracking-wider text-foreground">
               Redes Sociales
             </h4>
             <div className="flex gap-3">

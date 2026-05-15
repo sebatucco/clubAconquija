@@ -12,7 +12,7 @@ const LocationSection = () => {
           viewport={{ once: true }}
           className="mb-12 text-center"
         >
-          <h2 className="mb-3 font-orbitron text-3xl font-bold text-foreground md:text-4xl">
+          <h2 className="mb-3 font-outfit text-3xl font-bold text-foreground md:text-4xl">
             ¿Dónde <span className="text-gradient-sky">Volamos</span>?
           </h2>
           <p className="text-muted-foreground">
@@ -28,7 +28,7 @@ const LocationSection = () => {
             className="overflow-hidden rounded-2xl shadow-lg"
           >
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28561.87!2d-65.4!3d-26.78!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9422837eeb5b4e23%3A0x1a2b3c4d5e6f7890!2sLoma%20Bola%2C%20San%20Javier%2C%20Tucum%C3%A1n!5e0!3m2!1ses!2sar!4v1700000000000"
+              src="https://www.google.com/maps?q=-26.822474,-65.369024&z=15&output=embed"
               width="100%"
               height="400"
               style={{ border: 0 }}
@@ -51,7 +51,7 @@ const LocationSection = () => {
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
                   <MapPin className="h-5 w-5 text-primary" />
                 </div>
-                <h3 className="font-orbitron text-lg font-bold text-foreground">Loma Bola</h3>
+                <h3 className="font-outfit text-lg font-bold text-foreground">Loma Bola</h3>
               </div>
               <ul className="mb-6 space-y-3 text-muted-foreground">
                 <li className="flex items-start gap-2">

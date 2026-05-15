@@ -23,7 +23,8 @@ const HeroSection = () => {
         <div className="cloud-float absolute left-[50%] top-[10%] h-12 w-36 rounded-full bg-primary-foreground/10 blur-3xl" />
       </div>
 
-      {/* Floating paraglider SVG */}
+      {/* Floating paraglider SVG - Removed */}
+      {/* 
       <motion.div
         className="paraglider-float absolute right-[10%] top-[20%] hidden opacity-80 md:block"
         initial={{ opacity: 0 }}
@@ -38,6 +39,7 @@ const HeroSection = () => {
           <circle cx="40" cy="48" r="4" fill="hsl(215 30% 30%)" />
         </svg>
       </motion.div>
+      */}
 
       {/* Content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center">
@@ -45,7 +47,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="mb-4 font-orbitron text-xs font-semibold uppercase tracking-[0.3em] text-primary-foreground/80 md:text-sm"
+          className="mb-4 font-outfit text-xs font-semibold uppercase tracking-[0.3em] text-primary-foreground/80 md:text-sm"
         >
           Aconquija Club de Vuelo y Aventura
         </motion.p>
@@ -54,7 +56,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.7 }}
-          className="mb-6 max-w-4xl font-orbitron text-4xl font-bold leading-tight text-primary-foreground md:text-6xl lg:text-7xl"
+          className="mb-6 max-w-4xl font-outfit text-4xl font-bold leading-tight text-primary-foreground md:text-6xl lg:text-7xl"
         >
           Viví la experiencia{" "}
           <span className="text-accent">de volar</span>
