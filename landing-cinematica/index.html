@@ -79,14 +79,14 @@ em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.0
 .burger span+span{margin-top:5px}
 .menu-open .burger span:first-child{transform:translateY(3.25px) rotate(45deg)}
 .menu-open .burger span:last-child{transform:translateY(-3.25px) rotate(-45deg)}
-.mobile-menu{position:fixed;inset:0;z-index:70;background:rgba(5,14,20,.96);backdrop-filter:blur(10px);display:flex;flex-direction:column;justify-content:flex-end;
-  padding:120px var(--gutter) max(40px,env(safe-area-inset-bottom));opacity:0;visibility:hidden;transition:opacity .35s var(--ease),visibility .35s}
+.mobile-menu{position:fixed;inset:0;z-index:74;background:rgba(5,14,20,.96);backdrop-filter:blur(10px);display:flex;flex-direction:column;justify-content:flex-end;
+  padding:120px var(--gutter) 120px;opacity:0;visibility:hidden;transition:opacity .35s var(--ease),visibility .35s}
 .menu-open .mobile-menu{opacity:1;visibility:visible}
 .mobile-menu a.big{font-size:clamp(40px,12vw,64px);font-weight:400;letter-spacing:-.04em;line-height:1.1;padding:4px 0;display:block}
 .mobile-menu .btn{margin-top:32px;align-self:flex-start}
 
 /* ---------- HERO ---------- */
-.hero{position:relative;height:100vh;height:100svh;min-height:600px;overflow:hidden}
+.hero{position:relative;z-index:1;height:100vh;height:100svh;min-height:600px;overflow:hidden}
 .hero-media{position:absolute;inset:0}
 .hero-media img{width:100%;height:100%;object-fit:cover;object-position:50% 38%;transform-origin:50% 40%}
 .hero-scrim{position:absolute;inset:0;background:
@@ -119,7 +119,7 @@ em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.0
 .ready.settled .hero-media img{transition:none}
 
 /* ---------- ALTIMETER HUD ---------- */
-.hud{position:fixed;right:var(--gutter);bottom:28px;z-index:60;display:flex;align-items:stretch;gap:14px;padding:14px 16px 14px 18px;border-radius:20px;
+.hud{position:fixed;right:var(--gutter);top:50%;margin-top:-70px;z-index:60;display:flex;align-items:stretch;gap:14px;padding:14px 16px 14px 18px;border-radius:20px;
   color:#fff;pointer-events:none;opacity:0;transform:translateY(10px);transition:opacity .6s var(--ease),transform .6s var(--ease-out)}
 .hud.on{transform:none}
 .hud.on{opacity:1}
@@ -134,7 +134,7 @@ em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.0
 .hud-mark{position:absolute;right:-2px;bottom:0;width:18px;height:2px;background:#fff;transform:translateY(50%)}
 
 /* ---------- STAGE (el vuelo) ---------- */
-.stage{position:relative;height:100vh;height:100svh;overflow:hidden;background:var(--bg)}
+.stage{position:relative;z-index:2;height:100vh;height:100svh;overflow:hidden;background:var(--bg)}
 .stage-grid{position:absolute;inset:0;display:grid;grid-template-columns:minmax(300px,5fr) 7fr;gap:clamp(24px,4vw,72px);align-items:center;
   padding:110px var(--gutter) 60px}
 .stage-text{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center}
@@ -246,6 +246,66 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
 .socials a:hover{background:var(--ink);color:#fff}
 .socials svg{width:18px;height:18px}
 
+/* ---------- PRELOADER ---------- */
+.loader{display:none}
+.anim .loader{display:flex;position:fixed;inset:0;z-index:100;background:var(--bg);flex-direction:column;justify-content:space-between;
+  padding:28px var(--gutter) max(32px,env(safe-area-inset-bottom));transition:transform 1s cubic-bezier(.76,0,.24,1)}
+.loader.out{transform:translateY(-100%)}
+.anim .loader.gone{display:none}
+.loader .lt{display:flex;justify-content:space-between;align-items:center}
+.loader .bar{position:relative;height:1px;background:rgba(255,255,255,.14);margin-bottom:28px}
+.loader .bar i{position:absolute;inset:0;background:#fff;transform:scaleX(var(--p,0));transform-origin:left}
+.loader .lb{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.loader .lb .label{max-width:16rem;line-height:1.6}
+.loader .count{font-weight:300;font-size:clamp(72px,14vw,200px);line-height:.8;letter-spacing:-.06em}
+.loader .count small{font-size:.28em;letter-spacing:-.02em;color:rgb(var(--fg)/.5);margin-left:.1em}
+
+/* ---------- TEXT ROLL ---------- */
+.roll{position:relative;display:inline-block;overflow:hidden;vertical-align:top;line-height:1.3}
+.roll > span{display:block;transition:transform .5s cubic-bezier(.25,.1,.25,1)}
+.roll > span + span{position:absolute;left:0;top:100%}
+@media (hover:hover){ .btn:hover .roll > span{transform:translateY(-100%)} }
+
+/* ---------- DOCK (CTA fijo) ---------- */
+.dock{position:fixed;right:var(--gutter);bottom:28px;z-index:75;display:flex;align-items:center;gap:6px;
+  opacity:0;visibility:hidden;transform:translateY(16px);transition:opacity .45s var(--ease),transform .55s var(--ease-out),visibility .45s}
+.dock.on,.menu-open .dock{opacity:1;visibility:visible;transform:none}
+.dock .btn-primary{box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.dock-menu{display:none;align-items:center;gap:10px;min-height:48px;padding:0 18px 0 16px;border-radius:999px;font-size:15px;font-weight:500}
+.dock-menu .bars{display:grid;gap:4px}
+.dock-menu .bars i{display:block;width:16px;height:1.5px;background:#fff;transition:transform .35s var(--ease-out)}
+.menu-open .dock-menu .bars i:first-child{transform:translateY(2.75px) rotate(45deg)}
+.menu-open .dock-menu .bars i:last-child{transform:translateY(-2.75px) rotate(-45deg)}
+
+/* ---------- FAQ ---------- */
+.faq{padding:clamp(110px,15vh,170px) var(--gutter) clamp(30px,5vh,60px)}
+.faq-grid{display:grid;grid-template-columns:minmax(280px,5fr) 7fr;gap:clamp(40px,6vw,110px);max-width:1400px;align-items:start}
+.faq-side{position:sticky;top:120px}
+.faq .label{color:rgba(7,20,27,.55)}
+.faq-side h2{margin:16px 0 20px;font-weight:500;font-size:clamp(44px,5.4vw,88px);line-height:.92;letter-spacing:-.05em}
+.faq-side h2 em{color:#2b7f8f}
+.faq-side p{max-width:24rem;margin:0 0 26px;color:rgba(7,20,27,.62)}
+.faq-side .ph{border-radius:24px;overflow:hidden;aspect-ratio:16/10;max-width:440px}
+.faq-side .ph img{width:100%;height:100%;object-fit:cover}
+.qa{border-top:1px solid rgba(7,20,27,.14)}
+.qa:last-child{border-bottom:1px solid rgba(7,20,27,.14)}
+.qa summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:26px 0;cursor:pointer;
+  font-size:clamp(19px,1.7vw,24px);font-weight:400;letter-spacing:-.02em}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary .pm{flex:none;position:relative;width:40px;height:40px;border-radius:50%;border:1px solid rgba(7,20,27,.18);transition:background .25s,border-color .25s,color .25s}
+.qa summary .pm::before,.qa summary .pm::after{content:"";position:absolute;left:50%;top:50%;width:13px;height:1.5px;background:currentColor;transform:translate(-50%,-50%);transition:transform .35s var(--ease-out)}
+.qa summary .pm::after{transform:translate(-50%,-50%) rotate(90deg)}
+.qa[open] summary .pm{background:var(--ink);color:#fff;border-color:var(--ink)}
+.qa[open] summary .pm::after{transform:translate(-50%,-50%) rotate(0)}
+.qa summary:hover .pm{border-color:var(--ink)}
+.qa .ans p{margin:0;padding:0 64px 28px 0;max-width:40rem;font-size:16.5px;color:rgba(7,20,27,.66)}
+.cta{padding-top:clamp(70px,10vh,110px)}
+
+/* chips en tarjetas */
+.chipset{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px}
+.chipset span{display:inline-flex;align-items:center;min-height:30px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.07);font-size:12.5px;color:rgb(var(--fg)/.78)}
+.card-body p{margin-bottom:18px}
+
 /* reveal */
 .anim [data-reveal]{opacity:0;transform:translateY(32px)}
 
@@ -257,7 +317,17 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
   .donde-grid .btn{grid-column:1/-1;justify-self:start}
 }
 @media (max-width:900px){
-  .burger{display:grid}
+  .burger{display:none}
+  .dock{left:50%;right:auto;bottom:max(14px,env(safe-area-inset-bottom));transform:translate(-50%,16px);padding:5px;border-radius:999px;
+    background:rgba(8,22,30,.6);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+  .dock.on,.menu-open .dock{transform:translate(-50%,0)}
+  .dock-menu{display:inline-flex}
+  .dock .btn-primary{box-shadow:none;white-space:nowrap}
+  .faq-grid{grid-template-columns:1fr}
+  .faq-side{position:relative;top:0}
+  .faq-side .ph{display:none}
+  .qa .ans p{padding-right:0}
+  footer{padding-bottom:110px}
   .nav-cta{display:none}
   .hero-inner{flex-direction:column;align-items:flex-start}
   .spot{display:none}
@@ -302,6 +372,14 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
 <body>
 <div class="grain" aria-hidden="true"></div>
 
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="lt"><span class="label"><span class="dot"></span>Aconquija · Club de vuelo</span><span class="label num">26°49′S · 65°22′O</span></div>
+  <div>
+    <div class="bar"><i id="ld-bar"></i></div>
+    <div class="lb"><span class="label">Chequeando el viento<br>y preparando el despegue</span><div class="count num"><span id="ld-n">000</span><small>%</small></div></div>
+  </div>
+</div>
+
 <header class="nav" id="top">
   <a class="brand" href="#inicio" aria-label="Aconquija, inicio">
     <img src="img/logo.png" alt="" width="42" height="42">
@@ -312,6 +390,7 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
     <a href="#experiencias">Experiencias</a>
     <a href="#galeria">Galería</a>
     <a href="#donde">Dónde volamos</a>
+    <a href="#preguntas">Preguntas</a>
   </nav>
   <a class="btn btn-primary nav-cta" href="#reservar">Reservar bautismo <span class="chip" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
   <button class="burger glass" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
@@ -322,6 +401,11 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
   <a class="big" href="#experiencias">Experiencias</a>
   <a class="big" href="#galeria">Galería</a>
   <a class="big" href="#donde">Dónde volamos</a>
+  <a class="big" href="#preguntas">Preguntas</a>
+</div>
+
+<div class="dock" id="dock">
+  <button class="dock-menu" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span class="bars" aria-hidden="true"><i></i><i></i></span><span class="dm-l">Menú</span></button>
   <a class="btn btn-primary" href="#reservar">Reservar bautismo <span class="chip" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
 </div>
 
@@ -401,9 +485,9 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
     <div class="label"><span class="dot"></span>El club</div>
     <p class="big" id="manifesto">Aconquija reúne a los pilotos de parapente de Tucumán. Promovemos el vuelo libre, organizamos encuentros y llevamos gente nueva al aire, con pilotos certificados y <em>la montaña como escuela.</em></p>
     <div class="stats">
-      <div class="stat" data-reveal><div class="big-n num">30 <em>min</em></div><p>desde la ciudad hasta el despegue en Loma Bola.</p></div>
+      <div class="stat" data-reveal><div class="big-n num"><span data-count="30">30</span> <em>min</em></div><p>desde la ciudad hasta el despegue en Loma Bola.</p></div>
       <div class="stat" data-reveal><div class="big-n">Casi <em>todo el año</em></div><p>de temporada, gracias a las térmicas de las sierras.</p></div>
-      <div class="stat" data-reveal><div class="big-n num">4</div><p>formas de volar con nosotros, desde tu primer vuelo hasta competir.</p></div>
+      <div class="stat" data-reveal><div class="big-n num"><span data-count="4">4</span></div><p>formas de volar con nosotros, desde tu primer vuelo hasta competir.</p></div>
     </div>
   </section>
 
@@ -420,6 +504,7 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
           <div class="top"><span class="tag">Sin experiencia previa</span><span class="idx">01</span></div>
           <h3>Vuelo<br>bautismo</h3>
           <p>Tu primer vuelo en parapente biplaza, junto a un piloto certificado del club. Vos solo disfrutás: del despegue y el aterrizaje se encarga él.</p>
+          <div class="chipset"><span>Biplaza</span><span>Piloto certificado</span><span>Despegue en Loma Bola</span></div>
           <a class="btn btn-primary" href="#reservar" data-pick="bautismo">Reservar bautismo <span class="chip" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
         </div>
       </article>
@@ -429,6 +514,7 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
           <div class="top"><span class="tag">Curso por etapas</span><span class="idx">02</span></div>
           <h3>Formación<br>de pilotos</h3>
           <p>Del inflado en la ladera escuela hasta tu primer vuelo autónomo, con instructores experimentados acompañando cada etapa.</p>
+          <div class="chipset"><span>Inflado en ladera escuela</span><span>Instructores del club</span><span>Hasta el vuelo autónomo</span></div>
           <a class="btn btn-primary" href="#reservar" data-pick="curso">Quiero ser piloto <span class="chip" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
         </div>
       </article>
@@ -438,6 +524,7 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
           <div class="top"><span class="tag">Encuentros y competencias</span><span class="idx">03</span></div>
           <h3>Eventos</h3>
           <p>Encuentros, competencias y festivales que traen pilotos de todo el país a volar las Sierras de San Javier.</p>
+          <div class="chipset"><span>Encuentros</span><span>Competencias</span><span>Festivales</span></div>
           <a class="btn btn-primary" href="#reservar" data-pick="eventos">Próximos eventos <span class="chip" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
         </div>
       </article>
@@ -447,6 +534,7 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
           <div class="top"><span class="tag">Pilotos del NOA</span><span class="idx">04</span></div>
           <h3>Comunidad</h3>
           <p>Jornadas de vuelo, asados en la montaña y una red de pilotos que comparte el cielo y se cuida entre sí.</p>
+          <div class="chipset"><span>Jornadas de vuelo</span><span>Asados en la montaña</span><span>Pilotos del NOA</span></div>
           <a class="btn btn-primary" href="#reservar" data-pick="club">Sumarme al club <span class="chip" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
         </div>
       </article>
@@ -485,8 +573,28 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
     </div>
   </section>
 
+  <!-- FAQ · TODO: confirmar respuestas con el club -->
+  <section class="sheet faq" id="preguntas">
+    <div class="faq-grid">
+      <div class="faq-side">
+        <div class="label"><span class="dot"></span>Preguntas frecuentes</div>
+        <h2>Antes de<br><em>despegar.</em></h2>
+        <p>Lo que más nos preguntan antes del primer vuelo. Si te queda alguna duda, escribinos y te respondemos.</p>
+        <div class="ph"><img src="img/bautismo.webp" alt="Vuelo biplaza al atardecer" loading="lazy"></div>
+      </div>
+      <div class="faq-list">
+        <details class="qa" open><summary>¿Necesito experiencia para volar?<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p>No. En el vuelo bautismo vas en un parapente biplaza junto a un piloto certificado del club, que se encarga del despegue, el vuelo y el aterrizaje. Vos solo tenés que disfrutar.</p></div></details>
+        <details class="qa"><summary>¿Qué pasa si el día no tiene buenas condiciones?<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p>Volamos solo cuando el viento y las térmicas son seguros. Si el día no acompaña, coordinamos otra fecha con vos.</p></div></details>
+        <details class="qa"><summary>¿Hay límite de edad o de peso?<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p>Depende del equipo y del piloto que te lleve. Escribinos con tu edad y tu peso aproximado y te confirmamos si podés volar.</p></div></details>
+        <details class="qa"><summary>¿Qué tengo que llevar?<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p>Ropa cómoda, calzado cerrado y algo de abrigo: arriba suele estar más fresco que en la ciudad. El equipo de vuelo lo pone el club.</p></div></details>
+        <details class="qa"><summary>¿Cuánto dura el vuelo?<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p>Lo decide el aire: depende de las condiciones de ese día. Cuando reserves te contamos qué esperar.</p></div></details>
+        <details class="qa"><summary>¿Dónde nos encontramos?<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p>En el despegue de Loma Bola, en las Sierras de San Javier, a unos 30 minutos de la ciudad. Al reservar te pasamos la ubicación exacta.</p></div></details>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
-  <section class="sheet cta" id="reservar">
+  <section class="sheet cta" id="reservar" style="margin-top:0;border-radius:0">
     <div class="cta-grid">
       <div>
         <div class="label"><span class="dot"></span>Reservas y consultas</div>
@@ -529,7 +637,7 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
 <script>
   // Fail-safe: only hide things for entrance if JS runs; force visible after 2.5s no matter what.
   document.documentElement.classList.add('anim');
-  setTimeout(function(){document.documentElement.classList.add('ready')},2500);
+  setTimeout(function(){var l=document.getElementById('loader');if(l)l.classList.add('gone');document.documentElement.classList.add('ready')},5000);
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -540,11 +648,38 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var WA = '5493814000000'; // TODO: número real del club
 
-  /* ---- entrance ---- */
-  function go(){ root.classList.add('ready'); setTimeout(function(){root.classList.add('settled')},2000); }
+  /* ---- text roll on buttons ---- */
+  document.querySelectorAll('.btn').forEach(function(b){
+    var t = Array.from(b.childNodes).find(function(n){ return n.nodeType === 3 && n.textContent.trim(); });
+    if (!t) return;
+    var txt = t.textContent.trim(), r = document.createElement('span');
+    r.className = 'roll'; r.innerHTML = '<span></span><span aria-hidden="true"></span>';
+    r.firstChild.textContent = txt; r.lastChild.textContent = txt;
+    t.replaceWith(r);
+  });
+
+  /* ---- preloader "despegue" + entrance ---- */
+  var loader = document.getElementById('loader'), ldN = document.getElementById('ld-n'), ldBar = document.getElementById('ld-bar');
   var heroImg = document.querySelector('.hero-media img');
-  if (heroImg.complete) requestAnimationFrame(function(){requestAnimationFrame(go)});
-  else { heroImg.addEventListener('load', go); heroImg.addEventListener('error', go); }
+  var imgReady = heroImg.complete, t0 = performance.now(), MIN = reduce ? 0 : 1300, done = false;
+  if (!imgReady){ heroImg.addEventListener('load', function(){ imgReady = true; }); heroImg.addEventListener('error', function(){ imgReady = true; }); }
+  function go(){ root.classList.add('ready'); setTimeout(function(){root.classList.add('settled')},2000); }
+  function finish(){
+    if (done) return; done = true;
+    ldN.textContent = '100'; ldBar.style.setProperty('--p', 1);
+    if (reduce){ loader.classList.add('gone'); go(); return; }
+    setTimeout(function(){ loader.classList.add('out'); setTimeout(go, 280); setTimeout(function(){ loader.classList.add('gone'); }, 1100); }, 180);
+  }
+  (function step(now){
+    if (done) return;
+    var el = now - t0, target = Math.min(1, el / Math.max(1, MIN));
+    if (!imgReady) target = Math.min(target, .9);
+    var p = 1 - Math.pow(1 - target, 2.2);
+    ldN.textContent = String(Math.round(p * 100)).padStart(3, '0');
+    ldBar.style.setProperty('--p', p);
+    if (target >= 1 && imgReady) finish(); else requestAnimationFrame(step);
+  })(t0);
+  setTimeout(finish, 4000); // nunca más de 4 s
 
   /* ---- clock + year ---- */
   var clock = document.getElementById('clock');
@@ -553,15 +688,16 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
   document.getElementById('year').textContent = new Date().getFullYear();
 
   /* ---- mobile menu ---- */
-  var burger = document.querySelector('.burger'), menu = document.getElementById('menu');
+  var burger = document.querySelector('.burger'), menu = document.getElementById('menu'), dockMenu = document.querySelector('.dock-menu');
   function setMenu(open){
     document.body.classList.toggle('menu-open', open);
-    burger.setAttribute('aria-expanded', open); burger.setAttribute('aria-label', open ? 'Cerrar menú':'Abrir menú');
+    [burger, dockMenu].forEach(function(b){ b.setAttribute('aria-expanded', open); b.setAttribute('aria-label', open ? 'Cerrar menú':'Abrir menú'); });
+    dockMenu.querySelector('.dm-l').textContent = open ? 'Cerrar' : 'Menú';
     menu.setAttribute('aria-hidden', !open);
     if (lenis) open ? lenis.stop() : lenis.start();
     document.body.style.overflow = open ? 'hidden' : '';
   }
-  burger.addEventListener('click', function(){ setMenu(!document.body.classList.contains('menu-open')); });
+  [burger, dockMenu].forEach(function(b){ b.addEventListener('click', function(){ setMenu(!document.body.classList.contains('menu-open')); }); });
   menu.addEventListener('click', function(e){ if (e.target.closest('a')) setMenu(false); });
   addEventListener('keydown', function(e){ if (e.key === 'Escape') setMenu(false); });
   addEventListener('resize', function(){ if (innerWidth > 900) setMenu(false); });
@@ -586,6 +722,28 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
   document.querySelectorAll('[data-pick]').forEach(function(a){
     a.addEventListener('click', function(){ var r = form.querySelector('input[value="'+a.dataset.pick+'"]'); if (r){ r.checked = true; buildWA(); } });
   });
+
+  /* ---- dock: aparece después del hero, se esconde en la sección de reservas ---- */
+  var dock = document.getElementById('dock'), resv = document.getElementById('reservar');
+  function dockUpdate(){
+    var r = resv.getBoundingClientRect();
+    dock.classList.toggle('on', scrollY > innerHeight * .75 && r.top > innerHeight * .6);
+  }
+  addEventListener('scroll', dockUpdate, { passive: true }); dockUpdate();
+
+  /* ---- contadores ---- */
+  var counters = document.querySelectorAll('[data-count]');
+  if ('IntersectionObserver' in window && !reduce){
+    counters.forEach(function(c){ c.textContent = '0'; });
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (!e.isIntersecting) return; io.unobserve(e.target);
+        var el = e.target, end = +el.dataset.count, s0 = performance.now(), D = 1600;
+        (function f(now){ var k = Math.min(1, (now - s0) / D); el.textContent = Math.round(end * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(f); })(s0);
+      });
+    }, { threshold: .6 });
+    counters.forEach(function(c){ io.observe(c); });
+  }
 
   /* ---- no GSAP? show everything and stop ---- */
   var lenis = null;
@@ -646,7 +804,9 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
     }
 
     /* hero: drift up into the sky */
-    gsap.to('.hero-media img', { scale: 1.2, yPercent: 6, ease: 'none',
+    gsap.to('.hero-media img', { scale: 1.12, ease: 'none',
+      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+    gsap.to('.hero', { yPercent: 50, ease: 'none',
       scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
     gsap.to('.hero-inner', { y: -120, autoAlpha: 0, ease: 'none',
       scrollTrigger: { trigger: '.hero', start: 'top top', end: '70% top', scrub: true } });
@@ -714,7 +874,10 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
     /* generic reveals */
     ScrollTrigger.batch('[data-reveal]', { start: 'top 88%', once: true,
       onEnter: function(b){ gsap.to(b, { opacity: 1, y: 0, duration: .9, ease: 'power3.out', stagger: .1, overwrite: true }); } });
-    gsap.utils.toArray('.sec-head h2, .cta h2').forEach(function(h){
+    gsap.utils.toArray('.qa').forEach(function(q, i){
+      gsap.from(q, { y: 30, autoAlpha: 0, duration: .8, ease: 'power3.out', delay: (i % 6) * .06, scrollTrigger: { trigger: q, start: 'top 92%', once: true } });
+    });
+    gsap.utils.toArray('.sec-head h2, .cta h2, .faq-side h2').forEach(function(h){
       gsap.from(h, { y: 50, autoAlpha: 0, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: h, start: 'top 88%', once: true } });
     });
 

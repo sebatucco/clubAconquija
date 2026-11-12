@@ -4,7 +4,8 @@ Versión nueva de la landing, en un solo `index.html` (sin build).
 
 - **Stack:** HTML + CSS + GSAP 3.12.5 (ScrollTrigger) + Lenis 1.1.13 por CDN. Fuentes: Outfit + Instrument Serif.
 - **Idea central:** la página es el vuelo. Un altímetro fijo sube a medida que bajás por la página y marca el "variómetro" según la velocidad de scroll; al final "aterriza".
-- **Secciones:** hero · el vuelo en 3 tiempos (sección fija con scroll) · el club · experiencias (tarjetas que se apilan) · galería horizontal · Loma Bola · reservas por WhatsApp.
+- **Secciones:** hero · el vuelo en 3 tiempos (sección fija con scroll) · el club · experiencias (tarjetas que se apilan) · galería horizontal · Loma Bola · preguntas frecuentes · reservas por WhatsApp.
+- **Tomado de las referencias (Fiber / Fightness):** preloader con contador, botón de reserva fijo (en celular: barra flotante con Menú + Reservar), texto que rueda en los botones, contadores animados, etiquetas en las experiencias, FAQ con columna fija y hero que queda atrás mientras la siguiente sección lo tapa.
 
 ## Ver en local
 ```bash
@@ -16,3 +17,4 @@ npx serve .   # o: python3 -m http.server
 - Reemplazar el número de WhatsApp (`WA` en el script y los `wa.me/5493814000000`) por el real.
 - Confirmar las cuentas de Instagram y Facebook.
 - Cambiar las fotos de muestra por fotos reales del club.
+- Confirmar con el club las respuestas de **Preguntas frecuentes** (marcadas con `TODO` en el HTML) y sumar cifras reales si las hay (vuelos realizados, años del club, calificación).
