@@ -334,6 +334,8 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
 .chipset span{display:inline-flex;align-items:center;min-height:30px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.07);font-size:12.5px;color:rgb(var(--fg)/.78)}
 .card-body p{margin-bottom:18px}
 
+.hint-touch{display:none}
+@media (max-width:767px){.hint-wide{display:none}.hint-touch{display:inline}}
 /* reveal */
 .anim [data-reveal]{opacity:0;transform:translateY(32px)}
 
@@ -376,7 +378,7 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
   .stats{grid-template-columns:1fr;gap:28px}
   .sheet,.exp{border-radius:32px 32px 0 0;margin-top:-32px}
 }
-@media (max-width:1023px){
+@media (max-width:767px){
   .gallery-pin{height:auto;padding:110px 0 90px}
   .track{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:6px}
   .track::-webkit-scrollbar{display:none}
@@ -578,7 +580,7 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
     <div class="gallery-pin">
       <div class="sec-head">
         <div><div class="label"><span class="dot"></span>Galería</div><h2>Tucumán,<br><em>desde arriba.</em></h2></div>
-        <p>Momentos de nuestras jornadas de vuelo. Deslizá para recorrerlos.</p>
+        <p>Momentos de nuestras jornadas de vuelo. <span class="hint-wide">Seguí bajando para recorrerlos.</span><span class="hint-touch">Deslizá para recorrerlos.</span></p>
       </div>
       <div class="track" id="track">
         <figure class="shot w"><div class="ph"><img src="img/panoramica.webp" alt="Valle verde visto desde un parapente" loading="lazy"></div><figcaption><b>01</b> Paisajes del valle</figcaption></figure>
@@ -899,7 +901,7 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
 
   var mm = gsap.matchMedia();
 
-  mm.add({ motion: '(prefers-reduced-motion: no-preference)', desktop: '(min-width: 1024px)', mobile: '(max-width: 1023px)' }, function(ctx){
+  mm.add({ motion: '(prefers-reduced-motion: no-preference)', desktop: '(min-width: 1024px)', wide: '(min-width: 768px)', mobile: '(max-width: 1023px)' }, function(ctx){
     var c = ctx.conditions;
     if (!c.motion){
       root.classList.remove('anim');
@@ -967,7 +969,7 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
     });
 
     /* gallery: horizontal flight on desktop */
-    if (c.desktop){
+    if (c.wide){
       var track = document.getElementById('track');
       gsap.to(track, { x: function(){ return -(track.scrollWidth - innerWidth); }, ease: 'none',
         scrollTrigger: { trigger: '.gallery', start: 'top top', end: function(){ return '+=' + (track.scrollWidth - innerWidth); },
@@ -988,14 +990,22 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
     gsap.utils.toArray('.qa').forEach(function(q, i){
       gsap.from(q, { y: 30, autoAlpha: 0, duration: .8, ease: 'power3.out', delay: (i % 6) * .06, scrollTrigger: { trigger: q, start: 'top 92%', once: true } });
     });
-    gsap.utils.toArray('.sec-head h2, .cta h2, .faq-side h2').forEach(function(h){
+    gsap.utils.toArray('.exp .sec-head h2, .cta h2, .faq-side h2').forEach(function(h){
       gsap.from(h, { y: 50, autoAlpha: 0, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: h, start: 'top 88%', once: true } });
     });
 
     return function(){ /* matchMedia cleans up tweens & triggers */ };
   });
 
-  addEventListener('load', function(){ ScrollTrigger.refresh(); });
+  /* recalcular posiciones cuando cambian las medidas (fuentes, imágenes, ventana) */
+  var lastH = 0, rT;
+  function softRefresh(){ clearTimeout(rT); rT = setTimeout(function(){ ScrollTrigger.refresh(); }, 180); }
+  ScrollTrigger.addEventListener('refresh', function(){ lastH = document.body.scrollHeight; });
+  addEventListener('load', softRefresh);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(softRefresh);
+  if ('ResizeObserver' in window){
+    new ResizeObserver(function(){ if (Math.abs(document.body.scrollHeight - lastH) > 4) softRefresh(); }).observe(document.body);
+  }
 })();
 </script>
 </body>
