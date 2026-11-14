@@ -202,14 +202,42 @@ em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.0
 .shot.s{align-self:flex-end} .shot.s .ph{height:36vh;width:36vh}
 
 /* ---------- DONDE ---------- */
-.donde{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;padding:140px var(--gutter) clamp(48px,8vh,80px)}
+.donde{position:relative;overflow:hidden;padding:clamp(120px,16vh,170px) var(--gutter) clamp(80px,12vh,130px)}
 .donde-bg{position:absolute;inset:-10% 0;}
 .donde-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 50%}
-.donde::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(5,14,20,.95) 0%,rgba(5,14,20,.55) 45%,rgba(5,14,20,.35) 70%,rgba(5,14,20,.9) 100%)}
+.donde::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(5,14,20,.97) 0%,rgba(5,14,20,.82) 40%,rgba(5,14,20,.5) 75%,rgba(5,14,20,.92) 100%)}
 .donde > *:not(.donde-bg){position:relative;z-index:2}
 .mega{margin:14px 0 0;font-weight:600;font-size:clamp(76px,17vw,290px);line-height:.8;letter-spacing:-.065em;white-space:nowrap}
 .mega em{font-weight:400;color:var(--mist);letter-spacing:-.04em}
 .donde-grid{display:grid;grid-template-columns:repeat(4,1fr) auto;gap:28px;align-items:end;margin-top:clamp(40px,7vh,72px);padding-top:28px;border-top:1px solid rgba(255,255,255,.18)}
+.route{display:grid;grid-template-columns:minmax(300px,5fr) 7fr;gap:clamp(32px,5vw,90px);align-items:center;margin-top:clamp(40px,7vh,72px)}
+.coord{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 30px}
+.coord span{display:inline-flex;align-items:center;min-height:34px;padding:0 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);font-size:13px;color:rgb(var(--fg)/.85)}
+.steps{list-style:none;margin:0 0 34px;padding:0;counter-reset:st}
+.steps li{position:relative;padding:0 0 22px 52px;counter-increment:st}
+.steps li::before{content:counter(st,decimal-leading-zero);position:absolute;left:0;top:-2px;font-family:var(--serif);font-style:italic;font-size:22px;color:var(--mist)}
+.steps li::after{content:"";position:absolute;left:12px;top:30px;bottom:6px;width:1px;background:rgba(255,255,255,.16)}
+.steps li:last-child{padding-bottom:0}.steps li:last-child::after{display:none}
+.steps b{display:block;font-weight:500;font-size:18px;letter-spacing:-.015em;margin-bottom:4px}
+.steps span{display:block;font-size:15px;color:rgb(var(--fg)/.68);max-width:30rem}
+.route-actions{display:flex;flex-wrap:wrap;gap:10px}
+.map{position:relative;margin:0;border-radius:32px;overflow:hidden;padding:clamp(14px,1.6vw,22px)}
+.map svg{display:block;width:100%;height:auto}
+.map figcaption{display:flex;justify-content:space-between;gap:16px;padding:6px 8px 2px;font-size:12px;color:rgb(var(--fg)/.55)}
+.map .contour{fill:none;stroke:rgba(169,220,226,.13);stroke-width:1}
+.map .road-bg{fill:none;stroke:rgba(255,255,255,.16);stroke-width:2;stroke-dasharray:2 6;stroke-linecap:round}
+.map .road{fill:none;stroke:var(--mist);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.map .pt{fill:#fff}
+.map .pt-ring{fill:none;stroke:#fff;stroke-opacity:.35}
+.map .lb{font-family:var(--sans);font-size:13px;font-weight:500;fill:#fff}
+.map .lb-s{font-family:var(--sans);font-size:11px;font-weight:400;fill:rgba(255,255,255,.6)}
+.map .rd{font-family:var(--sans);font-size:10.5px;font-weight:500;letter-spacing:.14em;fill:var(--mist);opacity:.9}
+.map .city{fill:rgba(255,255,255,.22)}
+.map .goal{fill:var(--teal)}
+.map .goal-ring{fill:none;stroke:var(--teal);stroke-width:1.5}
+.copied{position:relative}
+.toast{position:fixed;left:50%;bottom:96px;z-index:95;transform:translate(-50%,20px);opacity:0;padding:12px 20px;border-radius:999px;background:#fff;color:var(--ink);font-size:14px;font-weight:500;transition:opacity .3s,transform .4s var(--ease-out);pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
 .fact b{display:block;font-weight:500;font-size:17px;letter-spacing:-.01em;margin-bottom:4px}
 .fact span{font-size:14px;color:rgb(var(--fg)/.66)}
 
@@ -313,8 +341,10 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
 @media (max-width:1100px){
   .nav-links{display:none}
   .hud{display:none}
-  .donde-grid{grid-template-columns:repeat(2,1fr)}
-  .donde-grid .btn{grid-column:1/-1;justify-self:start}
+  .route{grid-template-columns:1fr}
+  .map{order:-1}
+  .map .lb{font-size:19px}.map .lb-s{font-size:15px}.map .rd{font-size:14px}
+  .map .smt-s{transform:translateY(8px)}
 }
 @media (max-width:900px){
   .burger{display:none}
@@ -357,7 +387,8 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
 @media (max-width:560px){
   .hero-actions .btn{width:100%;justify-content:space-between}
   .hero-actions .btn-ghost{justify-content:center}
-  .donde-grid{grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+  .route-actions .btn{width:100%;justify-content:space-between}
+  .map{border-radius:24px;padding:10px}
   .brand .wm small{display:none}
 }
 @media (max-height:720px) and (min-width:901px){
@@ -371,6 +402,7 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <div class="loader" id="loader" aria-hidden="true">
   <div class="lt"><span class="label"><span class="dot"></span>Aconquija · Club de vuelo</span><span class="label num">26°49′S · 65°22′O</span></div>
@@ -441,7 +473,7 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
         <div class="label"><span class="dot"></span>Despegue principal</div>
         <h2>Loma Bola</h2>
         <p>Sierras de San Javier, Tucumán</p>
-        <div class="row"><span class="num">26°49′21″S · 65°22′08″O</span></div>
+        <div class="row"><span class="num">26°49′20″S · 65°22′05″O</span></div>
         <div class="row" style="margin-top:10px;padding-top:10px"><span>Hora local</span><b class="num" id="clock">--:--</b></div>
       </div>
     </div>
@@ -564,12 +596,66 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
     <div class="donde-bg"><img src="img/panoramica.webp" alt="" loading="lazy"></div>
     <div class="label"><span class="dot"></span>¿Dónde volamos?</div>
     <h2 class="mega">Loma <em>Bola</em></h2>
-    <div class="donde-grid">
-      <div class="fact" data-reveal><b>Vista total</b><span>Panorámica de todo el Valle de Tucumán.</span></div>
-      <div class="fact" data-reveal><b>Térmicas</b><span>Condiciones ideales para el parapente.</span></div>
-      <div class="fact" data-reveal><b>30 minutos</b><span>de acceso desde la ciudad.</span></div>
-      <div class="fact" data-reveal><b>Temporada</b><span>Se vuela casi todo el año.</span></div>
-      <a class="btn btn-ghost" href="https://www.google.com/maps/dir//-26.822474,-65.369024" target="_blank" rel="noopener">Cómo llegar ↗</a>
+    <div class="route">
+      <div class="route-info">
+        <div class="coord"><span class="num">26°49′20″S · 65°22′05″O</span><span>1.300 msnm</span><span>≈ 25 km desde el centro</span></div>
+        <ol class="steps">
+          <li data-reveal><b>Salí hacia el oeste</b><span>Desde el centro de San Miguel de Tucumán, tomá Av. Mate de Luna, que sigue como Av. Aconquija, hasta Yerba Buena.</span></li>
+          <li data-reveal><b>Subí el cerro San Javier</b><span>Al pie del cerro arranca la Ruta Provincial 340: un camino de curvas entre la selva de yungas hasta el Cristo Bendicente.</span></li>
+          <li data-reveal><b>Seguí hacia Villa Nougués</b><span>En la cima, tomá la RP 338 rumbo a Villa Nougués. A unos 4 km del Cristo está el despegue de Loma Bola.</span></li>
+        </ol>
+        <div class="route-actions">
+          <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;origin=San+Miguel+de+Tucum%C3%A1n&amp;destination=-26.82222,-65.36800&amp;travelmode=driving" target="_blank" rel="noopener">Abrir ruta en Google Maps <span class="chip" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+          <button class="btn btn-ghost" type="button" id="copy-coord" data-coord="-26.82222, -65.36800">Copiar coordenadas</button>
+        </div>
+      </div>
+      <figure class="map glass" id="map">
+        <svg viewBox="0 0 600 430" role="img" aria-labelledby="map-t map-d">
+          <title id="map-t">Ruta de San Miguel de Tucumán a Loma Bola</title>
+          <desc id="map-d">Desde el centro de San Miguel de Tucumán hacia el oeste hasta Yerba Buena, subida al cerro San Javier por la Ruta Provincial 340 hasta el Cristo Bendicente y luego Ruta Provincial 338 hacia Villa Nougués hasta Loma Bola.</desc>
+          <!-- sierra: curvas de nivel ilustrativas -->
+          <g class="contour">
+            <path d="M430.5 215.0 C430.3 247.0 386.8 281.6 367.5 310.9 C348.3 340.2 337.5 372.4 314.9 390.8 C292.3 409.1 260.4 412.5 231.9 420.9 C203.4 429.3 174.7 442.1 144.0 441.2 C113.2 440.3 71.6 436.1 47.4 415.6 C23.2 395.1 3.3 351.7 -1.2 318.3 C-5.7 284.9 20.6 249.5 20.5 215.0 C20.3 180.5 -8.4 142.0 -1.9 111.3 C4.6 80.7 35.5 54.3 59.3 31.1 C83.1 8.0 111.3 -21.1 140.7 -27.5 C170.0 -33.9 208.2 -21.2 235.2 -7.3 C262.3 6.6 280.9 35.0 303.0 56.0 C325.2 77.0 347.0 92.2 368.2 118.7 C389.4 145.2 430.6 183.0 430.5 215.0Z"/>
+            <path d="M381.0 219.0 C378.4 246.9 345.4 273.3 330.3 298.2 C315.3 323.1 308.9 352.5 290.8 368.3 C272.7 384.1 245.5 384.7 221.6 393.0 C197.7 401.3 173.0 418.7 147.4 418.2 C121.7 417.8 85.8 410.0 67.9 390.4 C50.0 370.7 44.4 328.8 39.9 300.2 C35.5 271.7 43.7 247.5 41.0 219.0 C38.4 190.5 17.7 154.9 24.0 129.0 C30.3 103.0 58.5 82.8 78.8 63.4 C99.2 44.1 121.9 17.0 146.0 12.8 C170.0 8.6 200.7 25.9 223.0 38.0 C245.3 50.1 259.3 70.0 279.8 85.5 C300.4 101.0 329.4 108.8 346.3 131.0 C363.1 153.3 383.7 191.1 381.0 219.0Z"/>
+            <path d="M334.4 223.0 C330.9 246.8 310.7 267.8 299.6 288.3 C288.5 308.9 282.4 333.0 267.8 346.4 C253.3 359.8 231.9 360.5 212.3 368.7 C192.8 376.9 171.0 396.5 150.5 395.5 C129.9 394.5 102.2 380.9 89.1 362.6 C76.1 344.4 77.4 309.4 72.3 286.2 C67.1 262.9 62.0 246.1 58.4 223.0 C54.9 199.9 44.7 169.4 50.9 147.7 C57.1 126.1 79.1 108.9 95.8 93.1 C112.4 77.3 131.6 55.0 150.9 52.8 C170.3 50.6 193.5 70.2 211.9 79.7 C230.3 89.1 243.0 98.3 261.2 109.3 C279.4 120.3 308.7 126.7 320.9 145.6 C333.1 164.5 338.0 199.2 334.4 223.0Z"/>
+            <path d="M292.5 227.0 C289.3 246.5 280.1 263.7 272.3 279.9 C264.5 296.2 257.1 313.4 245.7 324.6 C234.2 335.8 219.0 339.4 203.7 346.9 C188.4 354.5 169.5 372.2 153.9 370.1 C138.2 368.0 119.4 350.0 109.9 334.3 C100.4 318.5 102.6 293.6 97.0 275.7 C91.5 257.8 79.7 245.1 76.5 227.0 C73.3 208.9 71.9 184.7 77.7 167.1 C83.4 149.5 98.0 133.6 111.0 121.3 C124.0 109.1 140.5 94.2 155.7 93.5 C170.8 92.7 187.1 110.4 201.9 116.6 C216.7 122.9 229.6 123.3 244.6 131.0 C259.5 138.7 283.6 146.9 291.6 162.9 C299.6 178.9 295.7 207.5 292.5 227.0Z"/>
+            <path d="M256.5 231.0 C254.2 246.2 252.1 260.2 246.8 272.4 C241.6 284.7 233.5 295.4 224.9 304.5 C216.4 313.7 206.8 321.1 195.6 327.4 C184.4 333.8 168.8 345.8 157.6 342.7 C146.4 339.6 135.3 321.2 128.4 308.8 C121.5 296.4 121.5 281.2 116.2 268.2 C110.9 255.2 98.8 244.8 96.5 231.0 C94.2 217.2 97.9 199.5 102.7 185.6 C107.4 171.8 115.6 157.0 125.2 148.2 C134.7 139.3 148.7 132.5 160.0 132.5 C171.3 132.4 181.9 144.4 193.2 147.7 C204.6 151.1 216.9 146.8 228.1 152.4 C239.3 158.1 255.6 168.3 260.3 181.4 C265.1 194.5 258.8 215.8 256.5 231.0Z"/>
+            <path d="M226.1 235.0 C224.8 245.6 225.5 256.0 222.2 264.5 C218.9 272.9 211.9 278.6 206.1 285.5 C200.3 292.5 195.0 301.9 187.6 306.4 C180.1 310.9 168.7 315.7 161.4 312.3 C154.0 309.0 148.3 294.7 143.5 286.3 C138.6 277.8 136.5 270.2 132.3 261.7 C128.0 253.1 119.3 244.7 118.1 235.0 C116.8 225.3 121.4 213.5 124.9 203.7 C128.3 193.9 132.3 181.7 138.8 176.1 C145.2 170.5 155.8 169.9 163.5 169.9 C171.3 169.9 177.5 174.7 185.4 175.9 C193.3 177.0 203.4 172.6 210.8 176.8 C218.2 181.0 227.0 191.2 229.6 200.9 C232.1 210.6 227.3 224.4 226.1 235.0Z"/>
+            <path d="M199.8 239.0 C199.3 245.3 200.2 251.8 198.4 256.8 C196.6 261.8 192.3 264.6 189.2 269.2 C186.0 273.7 183.5 281.9 179.4 284.3 C175.3 286.7 168.7 286.3 164.7 283.7 C160.7 281.0 158.2 273.1 155.3 268.4 C152.3 263.7 149.8 260.6 147.2 255.7 C144.7 250.8 140.3 244.9 139.8 239.0 C139.3 233.1 142.4 226.3 144.4 220.4 C146.3 214.4 148.2 206.5 151.8 203.5 C155.4 200.5 161.6 202.7 166.0 202.4 C170.4 202.1 173.6 201.7 178.1 201.8 C182.5 201.8 188.8 199.8 192.7 202.7 C196.5 205.6 200.1 213.2 201.3 219.3 C202.5 225.3 200.3 232.7 199.8 239.0Z"/>
+          </g>
+          <!-- ciudad -->
+          <g class="city">
+            <circle cx="500" cy="300" r="2"/><circle cx="515" cy="292" r="2"/><circle cx="530" cy="300" r="2"/><circle cx="545" cy="292" r="2"/><circle cx="560" cy="300" r="2"/>
+            <circle cx="507" cy="315" r="2"/><circle cx="522" cy="308" r="2"/><circle cx="537" cy="316" r="2"/><circle cx="552" cy="308" r="2"/><circle cx="567" cy="316" r="2"/>
+            <circle cx="500" cy="330" r="2"/><circle cx="515" cy="324" r="2"/><circle cx="530" cy="331" r="2"/><circle cx="545" cy="324" r="2"/><circle cx="560" cy="331" r="2"/>
+            <circle cx="420" cy="292" r="1.6"/><circle cx="433" cy="300" r="1.6"/><circle cx="405" cy="300" r="1.6"/><circle cx="418" cy="308" r="1.6"/><circle cx="392" cy="292" r="1.6"/>
+          </g>
+          <!-- norte -->
+          <g transform="translate(560 48)"><path d="M0 -16 L6 4 L0 0 L-6 4Z" fill="rgba(255,255,255,.7)"/><text class="lb-s" x="0" y="20" text-anchor="middle">N</text></g>
+          <!-- ruta -->
+          <path class="road-bg" d="M532 312 C490 310 450 306 410 302 C380 299 350 296 330 292 C312 288 304 282 306 270 C309 255 326 250 322 236 C318 222 296 226 288 212 C281 199 300 190 296 176 C292 163 268 168 262 154 C257 142 274 133 266 120 C258 108 238 116 226 108 C216 101 214 96 210 92 C202 112 196 140 190 168 C184 198 178 226 172 252"/>
+          <path class="road" id="road" d="M532 312 C490 310 450 306 410 302 C380 299 350 296 330 292 C312 288 304 282 306 270 C309 255 326 250 322 236 C318 222 296 226 288 212 C281 199 300 190 296 176 C292 163 268 168 262 154 C257 142 274 133 266 120 C258 108 238 116 226 108 C216 101 214 96 210 92 C202 112 196 140 190 168 C184 198 178 226 172 252"/>
+          <!-- carteles de ruta -->
+          <text class="rd" x="440" y="290" text-anchor="middle">AV. ACONQUIJA</text>
+          <text class="rd" x="338" y="196">RP 340</text>
+          <text class="rd" x="200" y="210" text-anchor="end">RP 338</text>
+          <!-- puntos -->
+          <circle class="pt-ring" cx="532" cy="312" r="9"/><circle class="pt" cx="532" cy="312" r="4.5"/>
+          <text class="lb" x="532" y="346" text-anchor="middle"><tspan x="532">San Miguel</tspan><tspan x="532" dy="1.15em">de Tucumán</tspan></text>
+          <text class="lb-s smt-s" x="532" y="381" text-anchor="middle">Punto de partida</text>
+          <circle class="pt" cx="410" cy="302" r="3.5"/>
+          <text class="lb" x="410" y="328" text-anchor="middle">Yerba Buena</text>
+          <circle class="pt" cx="210" cy="92" r="3.5"/>
+          <text class="lb" x="222" y="76">Cristo Bendicente</text>
+          <text class="lb-s" x="222" y="61">Cima del San Javier</text>
+          <circle class="goal-ring" cx="172" cy="252" r="14"/><circle class="goal" cx="172" cy="252" r="6"/>
+          <text class="lb" x="172" y="286" text-anchor="middle">Loma Bola</text>
+          <text class="lb-s" x="172" y="302" text-anchor="middle">Despegue · 1.300 msnm</text>
+          <!-- auto que recorre la ruta -->
+          <g id="car"><circle r="7" fill="#fff"/><circle r="3" fill="#050e14"/></g>
+        </svg>
+        <figcaption><span>Mapa ilustrativo · no está a escala</span><span>Ruta en auto ≈ 25 km</span></figcaption>
+      </figure>
     </div>
   </section>
 
@@ -588,7 +674,7 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
         <details class="qa"><summary>¿Hay límite de edad o de peso?<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p>Depende del equipo y del piloto que te lleve. Escribinos con tu edad y tu peso aproximado y te confirmamos si podés volar.</p></div></details>
         <details class="qa"><summary>¿Qué tengo que llevar?<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p>Ropa cómoda, calzado cerrado y algo de abrigo: arriba suele estar más fresco que en la ciudad. El equipo de vuelo lo pone el club.</p></div></details>
         <details class="qa"><summary>¿Cuánto dura el vuelo?<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p>Lo decide el aire: depende de las condiciones de ese día. Cuando reserves te contamos qué esperar.</p></div></details>
-        <details class="qa"><summary>¿Dónde nos encontramos?<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p>En el despegue de Loma Bola, en las Sierras de San Javier, a unos 30 minutos de la ciudad. Al reservar te pasamos la ubicación exacta.</p></div></details>
+        <details class="qa"><summary>¿Dónde nos encontramos?<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p>En el despegue de Loma Bola, sobre la RP 338, a unos 4 km del Cristo Bendicente en el cerro San Javier. Arriba, en «¿Dónde volamos?», tenés la ruta desde la ciudad.</p></div></details>
       </div>
     </div>
   </section>
@@ -745,6 +831,27 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
     counters.forEach(function(c){ io.observe(c); });
   }
 
+  /* ---- copiar coordenadas ---- */
+  var toast = document.getElementById('toast'), tT;
+  function say(msg){ toast.textContent = msg; toast.classList.add('on'); clearTimeout(tT); tT = setTimeout(function(){ toast.classList.remove('on'); }, 2200); }
+  document.getElementById('copy-coord').addEventListener('click', function(){
+    var c = this.dataset.coord;
+    try {
+      navigator.clipboard.writeText(c).then(function(){ say('Coordenadas copiadas: ' + c); }, function(){ say(c); });
+    } catch(e){ say(c); }
+  });
+
+  /* ---- mapa: el auto recorre la ruta ---- */
+  var road = document.getElementById('road'), car = document.getElementById('car');
+  var roadLen = road.getTotalLength();
+  function drawRoute(p){
+    road.style.strokeDasharray = roadLen; road.style.strokeDashoffset = roadLen * (1 - p);
+    var pt = road.getPointAtLength(roadLen * p);
+    car.setAttribute('transform', 'translate(' + pt.x + ' ' + pt.y + ')');
+    car.style.opacity = p > .985 ? 0 : 1;
+  }
+  drawRoute(1);
+
   /* ---- no GSAP? show everything and stop ---- */
   var lenis = null;
   if (!window.gsap || !window.ScrollTrigger){ root.classList.remove('anim'); return; }
@@ -768,6 +875,7 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
 
   /* ---- altimeter HUD (signature) ---- */
   var hud = document.querySelector('.hud'), altEl = document.getElementById('alt'), varEl = document.getElementById('vario'), mark = document.getElementById('mark');
+  var donde = document.getElementById('donde');
   var MAX_ALT = 1250, lastY = scrollY, lastT = performance.now(), vSmooth = 0;
   function pad(n){ n = Math.round(n); return (n >= 0 ? '+' : '−') + String(Math.abs(n)).padStart(4,'0'); }
   function hudUpdate(){
@@ -778,7 +886,8 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
     var alt = Math.max(0, a * MAX_ALT);
     altEl.textContent = pad(alt);
     mark.style.bottom = (a * 100) + '%';
-    hud.classList.toggle('on', scrollY > innerHeight * .6 && p < .985);
+    var dr = donde.getBoundingClientRect();
+    hud.classList.toggle('on', scrollY > innerHeight * .6 && p < .985 && !(dr.top < innerHeight * .65 && dr.bottom > innerHeight * .35));
     var now = performance.now(), dt = Math.max(16, now - lastT);
     var v = (scrollY - lastY) / dt * (p < .86 ? 1 : -1) * 3.2;
     vSmooth += (v - vSmooth) * .15;
@@ -868,6 +977,8 @@ footer{background:var(--paper);color:var(--ink);padding:0 var(--gutter) max(36px
     /* donde: slow parallax */
     gsap.fromTo('.donde-bg', { yPercent: -6 }, { yPercent: 6, ease: 'none',
       scrollTrigger: { trigger: '.donde', start: 'top bottom', end: 'bottom top', scrub: true } });
+    ScrollTrigger.create({ trigger: '#map', start: 'top 80%', end: 'bottom 45%', scrub: .5,
+      onUpdate: function(st){ drawRoute(st.progress); }, onRefresh: function(st){ drawRoute(st.progress); } });
     gsap.from('.mega', { yPercent: 30, autoAlpha: 0, duration: 1.2, ease: 'expo.out',
       scrollTrigger: { trigger: '.mega', start: 'top 88%', once: true } });
 
